@@ -6,7 +6,7 @@ const ISStracker = () => {
     const [position, setPosition] = useState({latitude: null, longitude: null});
 
     const issIcon = new L.Icon({
-        iconUrl: '../assets/pic.png',
+        iconUrl: '/assets/pic.png',
         iconSize: [40, 40],
         iconAnchor: [20, 20],
     });
@@ -34,12 +34,12 @@ const ISStracker = () => {
     // live tracking of the international space station
     // im also going to implement leaflet to show it in an actual space
   return (
-    <div>
+    <div className="Map">
         {position.latitude && position.longitude ? 
         (<MapContainer
         center={[position.latitude, position.longitude]}
         zoom={2}
-        style={{ height: '500px', width: '100%'}}
+        style={{ height: '100%', width: '100%'}}
         scrollWheelZoom={true}>
             <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

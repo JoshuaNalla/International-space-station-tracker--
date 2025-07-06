@@ -5,9 +5,10 @@ import 'leaflet/dist/leaflet.css'
 
 function App() {
   return (
-    <div>
-      <p>hi</p>
-    <IssTracker/>
+    <div className="App">
+        <div className="Map-wrapper">
+        <IssTracker/>
+        </div>
     </div>
       );
     }
