@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import pic from '../assets/pic.png'
 
 const ISStracker = () => {
     const [position, setPosition] = useState({latitude: null, longitude: null});
 
     const issIcon = new L.Icon({
-        iconUrl: '/assets/pic.png',
+        iconUrl: pic,
         iconSize: [40, 40],
         iconAnchor: [20, 20],
     });
