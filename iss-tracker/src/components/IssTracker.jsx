@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import pic from '../assets/pic.png'
+import { Polyline } from 'react-leaflet'
 
 const ISStracker = () => {
     const [position, setPosition] = useState({latitude: null, longitude: null});
+    const [positionsHistory, setPositionsHistory] = useState([]);
 
     const issIcon = new L.Icon({
         iconUrl: pic,
@@ -16,10 +18,13 @@ const ISStracker = () => {
             const response = await fetch('http://api.open-notify.org/iss-now.json');
             const data = await response.json();
             console.log("going to set positions")
+            const lat = parseFloat(data.iss_position.latitude)
+            const lon = parseFloat(data.iss_position.longitude)
             setPosition({
-                latitude: parseFloat(data.iss_position.latitude),
-                longitude: parseFloat(data.iss_position.longitude),
+                latitude: lat,
+                longitude: lon
             });
+            setPositionsHistory(prev => [...prev, [lat, lon]]); //need to understand
             console.log("successfully retrieved: ", position.latitude, position.longitude)
         } catch (error) {
             console.error('Error fetching ISS location because of this error: ', error)
@@ -53,6 +58,8 @@ const ISStracker = () => {
                 Longitude: {position.longitude} 
             </Popup>
         </Marker>
+
+        <Polyline positions={positionsHistory} color="blue" dashArray="5, 10" />
         </MapContainer>)
         :
         (<p> map is loading vro...</p>)
